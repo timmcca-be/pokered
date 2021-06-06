@@ -10,7 +10,7 @@ GainExperience:
 	inc hl
 	ld a, [hli]
 	or [hl] ; is mon's HP 0?
-	jp z, .nextMon ; if so, go to next mon
+	jp .nextMon ; always skip to next pokemon so exp gain never happens
 	push hl
 	ld hl, wPartyGainExpFlags
 	ld a, [wWhichPokemon]

@@ -1,6 +1,6 @@
-# Pokémon Red and Blue [![Build Status][travis-badge]][travis]
+# Pokémon Red and Blue
 
-This is a disassembly of Pokémon Red and Blue.
+This is a disassembly of Pokémon Red and Blue. Each branch is a mod.
 
 It builds the following ROMs:
 

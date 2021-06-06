@@ -818,16 +818,14 @@ FaintEnemyPokemon:
 	ld b, EXP_ALL
 	call IsItemInBag
 	push af
-	jr z, .giveExpToMonsThatFought ; if no exp all, then jump
+	nop
+	nop
 
-; the player has exp all
-; first, we halve the values that determine exp gain
-; the enemy mon base stats are added to stat exp, so they are halved
-; the base exp (which determines normal exp) is also halved
+; set all values that determine exp gain to 0
 	ld hl, wEnemyMonBaseStats
 	ld b, $7
 .halveExpDataLoop
-	srl [hl]
+	ld [hl], 0
 	inc hl
 	dec b
 	jr nz, .halveExpDataLoop

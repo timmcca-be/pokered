@@ -4,7 +4,7 @@
 PrintLetterDelay::
 	ld a, [wd730]
 	bit 6, a
-	ret nz
+	ret ; always return instead of delaying
 	ld a, [wLetterPrintingDelayFlags]
 	bit 1, a
 	ret z

@@ -1,18 +1,8 @@
 PrintStrengthTxt:
 	ld hl, wd728
 	set 0, [hl]
-	ld hl, UsedStrengthText
-	call PrintText
 	ld hl, CanMoveBouldersText
 	jp PrintText
-
-UsedStrengthText:
-	text_far _UsedStrengthText
-	text_asm
-	ld a, [wcf91]
-	call PlayCry
-	call Delay3
-	jp TextScriptEnd
 
 CanMoveBouldersText:
 	text_far _CanMoveBouldersText

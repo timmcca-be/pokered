@@ -194,7 +194,6 @@ _NothingToCutText::
 	prompt
 
 _UsedCutText::
-	text_ram wcd6d
-	text " hacked"
-	line "away with CUT!"
+	text "Deforestation"
+	line "time!"
 	prompt

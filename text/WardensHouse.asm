@@ -13,8 +13,33 @@ _WardenGibberishText2::
 	done
 
 _WardenGibberishText3::
-	text "Ha? He ohay heh"
-	line "ha hoo ee haheh!"
+	text "Let's say, for"
+	line "the sake of"
+	cont "argument, that"
+	cont "all of the water"
+	cont "levels around the"
+	cont "world rise by,"
+	cont "let's say, five"
+	cont "feet over the"
+	cont "next 100 years."
+
+	para "Say ten feet by"
+	line "the next 100"
+	cont "years, and it"
+	cont "puts all the low-"
+	cont "lying areas on"
+	cont "the coast under"
+	cont "water."
+
+	para "Right, let's say"
+	line "all of that"
+	cont "happens."
+
+	para "You think the"
+	line "people aren't"
+	cont "just going to"
+	cont "sell their homes"
+	cont "and move?"
 	done
 
 _WardenTeethText1::
@@ -43,6 +68,36 @@ _WardenThankYouText::
 	cont "your trouble."
 	prompt
 
+_WardenWorkoutText::
+	text "WARDEN: While"
+	line "you're here, why"
+	cont "don't you try out"
+	cont "my new workout"
+	cont "routine?"
+
+	para "<PLAYER> did the"
+	line "WARDEN's special"
+	cont "workout..."
+	prompt
+
+_ReceivedMusclesText::
+	text "<PLAYER> grew big"
+	line "@"
+	text_ram wcf4b
+	text "!@"
+	text_end
+
+_MusclesNoRoomText::
+	text "Your pack is too"
+	line "full to stretch"
+	cont "over big MUSCLES!"
+	
+	para "Better toss"
+	line "something before"
+	cont "you keep working"
+	cont "out."
+	done
+
 _ReceivedHM04Text::
 	text "<PLAYER> received"
 	line "@"
@@ -58,6 +113,10 @@ _HM04ExplanationText::
 	line "move boulders"
 	cont "when you're out-"
 	cont "side of battle."
+
+	para "And with your new"
+	line "MUSCLES, you can"
+	cont "move them too!"
 
 	para "Oh yes, did you"
 	line "find SECRET HOUSE"

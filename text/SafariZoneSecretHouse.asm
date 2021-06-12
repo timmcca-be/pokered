@@ -21,6 +21,13 @@ _ReceivedHM03Text::
 	text "!@"
 	text_end
 
+_ReceivedSurfboardText::
+	text "<PLAYER> got the"
+	line "@"
+	text_ram wcf4b
+	text "!@"
+	text_end
+
 _HM03ExplanationText::
 	text "HM03 is SURF!"
 
@@ -36,10 +43,45 @@ _HM03ExplanationText::
 	para "You're super lucky"
 	line "for winning this"
 	cont "fabulous prize!"
+
+	para "And if that"
+	line "doesn't do it for"
+	cont "you, you can also"
+	cont "ferry yourself on"
+	cont "that SURFBOARD!"
 	done
 
 _HM03NoRoomText::
 	text "You don't have"
 	line "room for this"
 	cont "fabulous prize!"
+	done
+
+_SafariZoneSecretHouseLonelyText::
+	text "Wow, you really"
+	line "wanted to stay"
+	cont "and talk to me?"
+
+	para "That's so kind!"
+
+	para "I've been alone,"
+	line "staring at these"
+	cont "walls, for @"
+	text_decimal wPlayTimeHours, 1, 3
+	text_start
+	cont "hours and @"
+	text_decimal wPlayTimeMinutes, 1, 3
+	text_start
+	cont "minutes now."
+
+	para "Consider this my"
+	line "way of saying"
+	cont "thanks!"
+	prompt
+
+_SurfboardNoRoomText::
+	text "You don't have"
+	line "room for this"
+	cont "token of"
+	cont "gratitude!"
 	done

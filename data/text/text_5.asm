@@ -8,16 +8,9 @@ _CableClubNPCMakingPreparationsText::
 	cont "Please wait."
 	done
 
-_UsedStrengthText::
-	text_ram wcd6d
-	text " used"
-	line "STRENGTH.@"
-	text_end
-
 _CanMoveBouldersText::
-	text_ram wcd6d
-	text " can"
-	line "move boulders."
+	text "Let's move"
+	line "some boulders!"
 	prompt
 
 _CurrentTooFastText::

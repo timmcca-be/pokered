@@ -6,4 +6,8 @@ UsableItems_CloseMenu:
 	db OLD_ROD
 	db GOOD_ROD
 	db SUPER_ROD
+	db CHAINSAW
+	db MUSCLES
+	db TOWN_MAP
+	db SURFBOARD
 	db -1 ; end

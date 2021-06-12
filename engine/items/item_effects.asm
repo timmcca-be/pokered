@@ -60,13 +60,13 @@ ItemUsePtrTable:
 	dw UnusableItem      ; DOME_FOSSIL
 	dw UnusableItem      ; HELIX_FOSSIL
 	dw UnusableItem      ; SECRET_KEY
-	dw UnusableItem
+	dw ItemUseChainsaw   ; CHAINSAW
 	dw UnusableItem      ; BIKE_VOUCHER
 	dw ItemUseXAccuracy  ; X_ACCURACY
 	dw ItemUseEvoStone   ; LEAF_STONE
 	dw ItemUseCardKey    ; CARD_KEY
 	dw UnusableItem      ; NUGGET
-	dw UnusableItem      ; ??? PP_UP
+	dw ItemUseMuscles    ; MUSCLES
 	dw ItemUsePokedoll   ; POKE_DOLL
 	dw ItemUseMedicine   ; FULL_HEAL
 	dw ItemUseMedicine   ; REVIVE
@@ -633,6 +633,16 @@ ItemUseTownMap:
 	ld a, [wIsInBattle]
 	and a
 	jp nz, ItemUseNotTime
+	ld a, [wObtainedBadges]
+	bit BIT_THUNDERBADGE, a
+	jp z, .cantWarp
+	call CheckIfInOutsideMap
+	jr nz, .cantWarp
+	CheckEvent EVENT_GOT_HM02
+	jr z, .cantWarp
+	call ChooseFlyDestination
+	ret
+.cantWarp
 	farjp DisplayTownMap
 
 ItemUseBicycle:
@@ -667,6 +677,9 @@ ItemUseBicycle:
 
 ; used for Surf out-of-battle effect
 ItemUseSurfboard:
+	ld a, [wObtainedBadges]
+	bit BIT_SOULBADGE, a
+	jp z, NewBadgeRequired
 	ld a, [wWalkBikeSurfState]
 	ld [wWalkBikeSurfStateCopy], a
 	cp 2 ; is the player already surfing?
@@ -2121,6 +2134,26 @@ ItemUsePPRestore:
 	ld [wActionResultOrTookBattleTurn], a ; item use failed
 	ret
 
+ItemUseChainsaw:
+	ld a, [wIsInBattle]
+	and a
+	jp nz, ItemUseNotTime
+	ld a, [wObtainedBadges]
+	bit BIT_CASCADEBADGE, a
+	jp z, NewBadgeRequired
+	predef UsedCut
+	ret
+
+ItemUseMuscles:
+	ld a, [wIsInBattle]
+	and a
+	jp nz, ItemUseNotTime
+	ld a, [wObtainedBadges]
+	bit BIT_RAINBOWBADGE, a
+	jp z, NewBadgeRequired
+	predef PrintStrengthTxt
+	ret
+
 RaisePPWhichTechniqueText:
 	text_far _RaisePPWhichTechniqueText
 	text_end
@@ -2282,6 +2315,13 @@ ItemUseNotTime:
 ItemUseNotYoursToUse:
 	ld hl, ItemUseNotYoursToUseText
 	jr ItemUseFailed
+
+NewBadgeRequired:
+	ld hl, .newBadgeRequiredText
+	jr ItemUseFailed
+.newBadgeRequiredText:
+	text_far _NewBadgeRequiredText
+	text_end
 
 ThrowBallAtTrainerMon:
 	call RunDefaultPaletteCommand

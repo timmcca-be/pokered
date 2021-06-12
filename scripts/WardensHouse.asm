@@ -10,8 +10,10 @@ WardensHouse_TextPointers:
 
 FuchsiaHouse2Text1:
 	text_asm
-	CheckEvent EVENT_GOT_HM04
+	CheckEvent EVENT_GOT_MUSCLES
 	jr nz, .got_item
+	CheckEvent EVENT_GOT_HM04
+	jr nz, .get_muscles
 	ld b, GOLD_TEETH
 	call IsItemInBag
 	jr nz, .have_gold_teeth
@@ -40,17 +42,31 @@ FuchsiaHouse2Text1:
 	call PrintText
 	lb bc, HM_STRENGTH, 1
 	call GiveItem
-	jr nc, .bag_full
+	jr nc, .bag_full_HM04
 	ld hl, ReceivedHM04Text
 	call PrintText
 	SetEvent EVENT_GOT_HM04
+	jr .done
+.get_muscles
+	ld hl, WardenWorkoutText
+	call PrintText
+	lb bc, MUSCLES, 1
+	call GiveItem
+	jr nc, .bag_full_muscles
+	ld hl, ReceivedMusclesText
+	call PrintText
+	SetEvent EVENT_GOT_MUSCLES
 	jr .done
 .got_item
 	ld hl, HM04ExplanationText
 	call PrintText
 	jr .done
-.bag_full
+.bag_full_HM04
 	ld hl, HM04NoRoomText
+	call PrintText
+	jr .done
+.bag_full_muscles
+	ld hl, MusclesNoRoomText
 	call PrintText
 .done
 	jp TextScriptEnd
@@ -90,6 +106,19 @@ HM04ExplanationText:
 
 HM04NoRoomText:
 	text_far _HM04NoRoomText
+	text_end
+
+WardenWorkoutText:
+	text_far _WardenWorkoutText
+	text_end
+
+ReceivedMusclesText::
+	text_far _ReceivedMusclesText
+	sound_get_item_1
+	text_end
+
+MusclesNoRoomText::
+	text_far _MusclesNoRoomText
 	text_end
 
 FuchsiaHouse2Text5:

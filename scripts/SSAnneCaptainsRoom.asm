@@ -16,8 +16,10 @@ SSAnneCaptainsRoom_TextPointers:
 
 SSAnne7Text1:
 	text_asm
-	CheckEvent EVENT_GOT_HM01
+	CheckEvent EVENT_GOT_CHAINSAW
 	jr nz, .got_item
+	CheckEvent EVENT_GOT_HM01
+	jr nz, .get_chainsaw
 	ld hl, SSAnne7RubText
 	call PrintText
 	ld hl, ReceivingHM01Text
@@ -28,6 +30,16 @@ SSAnne7Text1:
 	ld hl, ReceivedHM01Text
 	call PrintText
 	SetEvent EVENT_GOT_HM01
+	jr .done
+.get_chainsaw
+	ld hl, LazyPokemonText
+	call PrintText
+	lb bc, CHAINSAW, 1
+	call GiveItem
+	jr nc, .bag_full
+	ld hl, ReceivedChainsawText
+	call PrintText
+	SetEvent EVENT_GOT_CHAINSAW
 	jr .done
 .bag_full
 	ld hl, HM01NoRoomText
@@ -76,6 +88,11 @@ ReceivedHM01Text:
 	sound_get_key_item
 	text_end
 
+ReceivedChainsawText:
+	text_far _ReceivedChainsawText
+	sound_get_key_item
+	text_end
+
 SSAnne7Text_61932:
 	text_far _SSAnne7Text_61932
 	text_end
@@ -90,4 +107,8 @@ SSAnne7Text2:
 
 SSAnne7Text3:
 	text_far _SSAnne7Text3
+	text_end
+
+LazyPokemonText:
+	text_far _LazyPokemonText
 	text_end

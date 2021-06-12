@@ -18,6 +18,14 @@ _HM02ExplanationText::
 	line "It will take you"
 	cont "back to any town."
 
+	para "Also, if you have"
+	line "a TOWN MAP and"
+	cont "the THUNDERBADGE,"
+	cont "the TOWN MAP will"
+	cont "react to HM02 and"
+	cont "allow you to warp"
+	cont "to any town!"
+
 	para "Put it to good"
 	line "use!"
 	done

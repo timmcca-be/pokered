@@ -38,6 +38,13 @@ _ReceivedHM01Text::
 	text "!@"
 	text_end
 
+_ReceivedChainsawText::
+	text "<PLAYER> got the"
+	line "@"
+	text_ram wcf4b
+	text "!@"
+	text_end
+
 _SSAnne7Text_61932::
 	text "CAPTAIN: Whew!"
 
@@ -62,3 +69,20 @@ _SSAnne7Text3::
 	cont "The CAPTAIN's"
 	cont "reading this!"
 	done
+
+_LazyPokemonText::
+	text "CAPTAIN: What's"
+	line "that?"
+
+	para "..."
+
+	para "Your #MON are"
+	line "weak and lazy?"
+	cont "Here, take this"
+	cont "too."
+
+	para "You can use it to"
+	line "CUT trees without"
+	cont "any help from"
+	cont "your #MON!"
+	prompt

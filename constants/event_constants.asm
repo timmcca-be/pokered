@@ -147,7 +147,8 @@
 	const_next $238
 	const EVENT_GOT_HM04
 	const EVENT_GAVE_GOLD_TEETH
-	const_skip 20
+	const EVENT_GOT_MUSCLES
+	const_skip 19
 	const EVENT_SAFARI_GAME_OVER
 	const EVENT_IN_SAFARI_ZONE
 	const_skip 8
@@ -554,7 +555,8 @@
 	const_skip 4
 	const EVENT_BEAT_SS_ANNE_5_TRAINER_0
 	const EVENT_BEAT_SS_ANNE_5_TRAINER_1
-	const_skip 26
+	const_skip 25
+	const EVENT_GOT_CHAINSAW
 	const EVENT_GOT_HM01
 	const EVENT_RUBBED_CAPTAINS_BACK
 	const EVENT_SS_ANNE_LEFT
@@ -707,6 +709,7 @@
 ; Safari Zone events
 	const_next $880
 	const EVENT_GOT_HM03
+	const EVENT_GOT_SURFBOARD
 
 ; Cerulean Cave events
 	const_next $8C0

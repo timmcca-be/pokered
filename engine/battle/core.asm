@@ -4601,6 +4601,9 @@ CriticalHitTest:
 	ld hl, wEnemyMovePower
 	ld de, wEnemyBattleStatus2
 .calcCriticalHitProbability
+; focus energy bug fixed.
+; now, focus energy / dire hit multiplies critical chance by 2.
+; moves with high critical hit rates still multiply critical chance by 8 (should this be 4?)
 	ld a, [hld]                  ; read base power from RAM
 	and a
 	ret z                        ; do nothing if zero
@@ -4608,15 +4611,12 @@ CriticalHitTest:
 	ld c, [hl]                   ; read move id
 	ld a, [de]
 	bit GETTING_PUMPED, a         ; test for focus energy
-	jr nz, .focusEnergyUsed      ; bug: using focus energy causes a shift to the right instead of left,
-	                             ; resulting in 1/4 the usual crit chance
-	sla b                        ; (effective (base speed/2)*2)
-	jr nc, .noFocusEnergyUsed
+	jr z, .afterFocusEnergyCheck  ; if focus energy was not used, skip crit boost.
+								  ; the multiplication below used to apply when focus energy was not used.
+	sla b                         ; (effective (base speed/2)*2)
+	jr nc, .afterFocusEnergyCheck
 	ld b, $ff                    ; cap at 255/256
-	jr .noFocusEnergyUsed
-.focusEnergyUsed
-	srl b
-.noFocusEnergyUsed
+.afterFocusEnergyCheck
 	ld hl, HighCriticalMoves     ; table of high critical hit moves
 .Loop
 	ld a, [hli]                  ; read move from move table
@@ -4624,9 +4624,13 @@ CriticalHitTest:
 	jr z, .HighCritical          ; if so, the move about to be used is a high critical hit ratio move
 	inc a                        ; move on to the next move, FF terminates loop
 	jr nz, .Loop                 ; check the next move in HighCriticalMoves
-	srl b                        ; /2 for regular move (effective (base speed / 2))
+	; no longer need to divide by 2, as we did not multiply by 2 above
 	jr .SkipHighCritical         ; continue as a normal move
 .HighCritical
+	sla b						 ; adds back the *2 that would have been performed above
+	jr nc, .firstNoCarry
+	ld b, $ff                    ; cap at 255/256
+.firstNoCarry
 	sla b                        ; *2 for high critical hit moves
 	jr nc, .noCarry
 	ld b, $ff                    ; cap at 255/256

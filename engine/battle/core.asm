@@ -5423,12 +5423,12 @@ MoveHitTest:
 	ld a, [wEnemyMoveAccuracy]
 	ld b, a
 .doAccuracyCheck
-; if the random number generated is greater than or equal to the scaled accuracy, the move misses
-; note that this means that even the highest accuracy is still just a 255/256 chance, not 100%
+; fixed 1/256 glitch.
 	call BattleRandom
 	cp b
-	jr nc, .moveMissed
-	ret
+	ret z ; if the random number (a) equals the scaled accuracy (b), the move hits
+	ret c ; if the random number (a) is less than the scaled accuracy (b), the move hits
+	nop ; preserving the size of the old code
 .moveMissed
 	xor a
 	ld hl, wDamage ; zero the damage
